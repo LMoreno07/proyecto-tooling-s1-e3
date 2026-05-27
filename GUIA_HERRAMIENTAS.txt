@@ -1,0 +1,306 @@
+================================================================================
+                    GUÍA DE APRENDIZAJE - HERRAMIENTAS DEL PROYECTO
+================================================================================
+Propósito: Que CADA integrante del equipo entienda QUÉ hace cada herramienta,
+          POR QUÉ es importante y CÓMO se usa.
+
+================================================================================
+1. ENTORNO VIRTUAL (venv)
+================================================================================
+
+📌 ¿QUÉ ES?
+Es una carpeta aislada (generalmente llamada "venv" o ".venv") que contiene
+su propia copia de Python y de los paquetes instalados.
+
+📌 ¿PARA QUÉ SIRVE?
+Permite tener diferentes versiones de paquetes para diferentes proyectos
+sin que entren en conflicto.
+
+📌 ¿POR QUÉ SE USA?
+Problema real: Proyecto A necesita Flask 2.0, Proyecto B necesita Flask 3.0.
+Sin entorno virtual, sólo puedes tener UNA versión instalada globalmente.
+Con entorno virtual, CADA proyecto tiene SU propia versión.
+
+📌 COMANDOS PRINCIPALES:
+
+| Comando                                    | Qué hace                                 | Ejemplo                          |
+|--------------------------------------------|------------------------------------------|----------------------------------|
+| `python -m venv nombre`                    | Crea un entorno virtual llamado "nombre" | `python -m venv mi_entorno`      |
+| `nombre\Scripts\activate` (Windows)        | Activa el entorno                        | `mi_entorno\Scripts\activate`    |
+| `source nombre/bin/activate` (Mac/Linux)   | Activa el entorno                        | `source mi_entorno/bin/activate` |
+| `deactivate`                               | Desactiva el entorno actual              | `deactivate`                     |                   
+| `pip list`                                 | Muestra paquetes instalados en el entorno activo | `pip list`               |
+
+📌 ¿CÓMO SABES QUE ESTÁ ACTIVADO?
+Aparece (nombre) al inicio de la línea de comandos:
+  (mi_entorno) C:\proyecto>
+
+================================================================================
+2. PIP (Gestor de Paquetes de Python)
+================================================================================
+
+📌 ¿QUÉ ES?
+Es el instalador oficial de paquetes de Python. Conecta con PyPI (Python Package
+Index), un repositorio enorme con miles de paquetes.
+
+📌 ¿PARA QUÉ SIRVE?
+Instalar, desinstalar y gestionar paquetes de terceros.
+
+📌 ¿POR QUÉ SE USA?
+Sin pip, tendrías que descargar manualmente cada paquete, descomprimirlo,
+ejecutar setup.py, y gestionar dependencias a mano. Pip lo hace automático.
+
+📌 COMANDOS PRINCIPALES:
+
+| Comando                           | Qué hace                                | Ejemplo                           |
+|-----------------------------------|-----------------------------------------|-----------------------------------|
+| `pip install nombre`              | Instala el paquete                      | `pip install flask`               |
+| `pip install nombre==version`     | Instala versión específica              | `pip install flask==3.1.0`        |
+| `pip uninstall nombre`            | Desinstala el paquete                   | `pip uninstall flask`             |
+| `pip freeze`                      | Lista paquetes instalados con versiones | `pip freeze`                      |
+| `pip freeze > requirements.txt`   | Guarda lista de paquetes en archivo     | `pip freeze > requirements.txt`   |
+| `pip install -r requirements.txt` | Instala TODOS los paquetes del archivo  | `pip install -r requirements.txt` |
+
+📌 REQUIREMENTS.TXT - ¿POR QUÉ ES IMPORTANTE?
+Permite que otro desarrollador clone tu proyecto y con UN SOLO COMANDO
+instale exactamente las mismas versiones que tú usas. Evita el "en mi máquina funciona".
+
+================================================================================
+3. FLASK (Framework Web)
+================================================================================
+
+📌 ¿QUÉ ES?
+Un framework web minimalista para Python. Permite crear aplicaciones web y APIs
+de forma sencilla.
+
+📌 ¿PARA QUÉ SIRVE?
+Manejar peticiones HTTP (GET, POST, DELETE, etc.) y devolver respuestas.
+
+📌 ¿POR QUÉ SE USA?
+Alternativas como Django son más pesadas. Para una API simple como esta,
+Flask es perfecto porque es ligero y fácil de aprender.
+
+📌 MÉTODOS/FUNCIONES PRINCIPALES:
+
+| Método/Función             | Qué hace                                     | Ejemplo                                     |
+|----------------------------|----------------------------------------------|---------------------------------------------|
+| `Flask(__name__)`          | Crea la aplicación                           | `app = Flask(__name__)`                     |
+| `@app.route('/ruta')`      | Decorador que asocia URL con función         | `@app.route('/tareas')`                     |
+| `methods=['GET','POST']`   | Especifica qué verbos HTTP acepta            | `@app.route('/', methods=['POST'])`         |
+| `app.run()`                | Inicia el servidor                           | `app.run(port=5000)`                        |
+| `request.get_json()`       | Obtiene datos JSON del cuerpo de la petición | `data = request.get_json()`                 |
+| `jsonify()`                | Convierte diccionario/lista a JSON           | `return jsonify({"id": 1})`                 |
+| `Blueprint()`              | Agrupa rutas relacionadas (modularización)   | `tareas_bp = Blueprint('tareas', __name__)` |
+| `app.register_blueprint()` | Registra un blueprint en la app              | `app.register_blueprint(tareas_bp)`         |
+
+📌 FLUJO DE UNA PETICIÓN:
+Cliente (Postman) → Flask recibe → Ejecuta función decorada → Devuelve JSON
+
+================================================================================
+4. FLAKE8 (Linter de Estilo)
+================================================================================
+
+📌 ¿QUÉ ES?
+Una herramienta que analiza tu código y te avisa si violas las reglas de estilo
+de PEP8 (la guía oficial de estilo de Python).
+
+📌 ¿PARA QUÉ SIRVE?
+Detectar problemas de formato: líneas muy largas, espacios incorrectos,
+variables sin usar, imports no ordenados, etc.
+
+📌 ¿POR QUÉ SE USA?
+Código limpio y consistente es más fácil de leer y mantener. En equipos,
+evita peleas por "cómo se escribe el código". El linter pone reglas objetivas.
+
+📌 COMANDOS PRINCIPALES:
+
+| Comando                        | Qué hace                            |
+|--------------------------------|-------------------------------------|
+| `flake8 archivo.py`            | Analiza un archivo                  |
+| `flake8 carpeta/`              | Analiza toda una carpeta            |
+| `flake8 --max-line-length=100` | Cambia límite de longitud de línea  |
+| `flake8 --ignore=E501,W503`    | Ignora ciertos errores/advertencias |
+
+📌 ERRORES COMUNES DE FLAKE8 (los que verás):
+
+| Código | Significado                                | Ejemplo malo                           | Ejemplo bueno            |
+|--------|--------------------------------------------|----------------------------------------|--------------------------|
+| E501   | Línea muy larga (>79 caracteres)           | `x = "texto muy muy muy muy largo..."` | Dividir en varias líneas |
+| W291   | Espacio en blanco al final de línea        | `"hola "`                              | `"hola"`                 |
+| E302   | Faltan 2 líneas en blanco antes de función | `def a(): pass`                        | `\n\ndef a(): pass`      |
+| F401   | Módulo importado pero no usado             | `import os` (si no se usa)             | Eliminar el import       |
+| E225   | Falta espacio alrededor de operador        | `x=5`                                  | `x = 5`                  |
+
+================================================================================
+5. BLACK (Formatter Automático)
+================================================================================
+
+📌 ¿QUÉ ES?
+Un formateador de código que REESCRIBE tu código automáticamente para que
+siga un estilo consistente.
+
+📌 ¿PARA QUÉ SIRVE?
+Olvídate de poner espacios, saltos de línea, comillas. Black lo hace por ti.
+
+📌 ¿POR QUÉ SE USA?
+- Ahorra tiempo: no discutes sobre estilo, Black decide por todos
+- Consistencia: todo el código del equipo se ve igual
+- "Opinionado": tiene reglas fijas (pocas opciones de configuración)
+
+📌 COMANDOS PRINCIPALES:
+
+| Comando                    | Qué hace                                     |
+|----------------------------|----------------------------------------------|
+| `black archivo.py`         | Formatea el archivo (LO MODIFICA)            |
+| `black carpeta/`           | Formatea toda la carpeta                     |
+| `black --check archivo.py` | Solo verifica, NO modifica (útil para CI)    |
+| `black --diff archivo.py`  | Muestra los cambios que haría sin aplicarlos |
+
+📌 REGLAS PRINCIPALES DE BLACK (lo que cambia automáticamente):
+
+| Regla                    | Cómo lo dejas tú   | Cómo lo deja Black                            |
+|--------------------------|--------------------|-----------------------------------------------|
+| Comillas                 | Puedes usar ' o "  | Siempre usa " (dobles)                        |
+| Espacios después de coma | `[1,2,3]`          | `[1, 2, 3]`                                   |
+| Operadores               | `x=5+3`            | `x = 5 + 3`                                   |
+| Longitud de línea        | Lo que sea         | Máximo 88 caracteres (ajusta automáticamente) |
+| Funciones vacías         | `def algo(): pass` | `def algo():\n    pass` (con indentación)     |
+
+================================================================================
+6. PYLINT (Linter de Calidad de Código)
+================================================================================
+
+📌 ¿QUÉ ES?
+Un analizador de código MUCHO más profundo que Flake8. No solo revisa estilo,
+sino también lógica, complejidad, nombres, diseño, etc.
+
+📌 ¿PARA QUÉ SIRVE?
+Detectar problemas potenciales: variables con nombres malos, funciones muy largas,
+código duplicado, malas prácticas, etc.
+
+📌 ¿POR QUÉ SE USA?
+Flake8 te dice "cómo se ve" tu código. Pylint te dice "qué tan bien está escrito".
+Da una PUNTUACIÓN del 0 al 10. En este proyecto se exige ≥ 8.0/10.
+
+📌 COMANDOS PRINCIPALES:
+
+| Comando                                | Qué hace                                    |
+|----------------------------------------|---------------------------------------------|
+| `pylint archivo.py`                    | Analiza archivo y da puntuación             |
+| `pylint --generate-rcfile`             | Genera archivo de configuración por defecto |
+| `pylint --rcfile=.pylintrc archivo.py` | Usa configuración personalizada             |
+
+📌 .PYLINTRC - ¿QUÉ ES Y PARA QUÉ?
+Archivo donde personalizas las reglas de Pylint. Puedes desactivar reglas
+que no te sirven o ajustar límites.
+
+📌 CONFIGURACIÓN QUE USAMOS EN ESTE PROYECTO:
+
+```ini
+[MESSAGES CONTROL]
+disable=missing-docstring  # No obliga a poner documentación en cada función
+
+[DESIGN]
+max-locals=20  # Permite hasta 20 variables locales (defecto: 15)
+
+[FORMAT]
+max-line-length=100  # Líneas de hasta 100 caracteres (defecto: 79)
+
+📌 TIPOS DE ERRORES QUE DETECTA PYLINT:
+
+| Código | Significado                            | Ejemplo                                       |                                    
+|--------|----------------------------------------|-----------------------------------------------|
+| C0103  | Nombre de variable no sigue convención | miVariable → debe ser mi_variable             |
+| C0114  | Falta docstring del módulo             | Falta """Descripción del archivo""" al inicio |
+| R0902  | Demasiadas variables de instancia      | Una clase con >7 atributos                    |
+| R0914  | Demasiadas variables locales           | Una función con >15 variables                 | 
+| W0612  | Variable no utilizada                  | x = 5 pero nunca usas x                       |
+| E1101  | Miembro inexistente                    | lista.appendx(5) (no existe appendx)          |
+| W0622  | Redefine built-in                      | len = 5 (len es función nativa de Python)     |
+
+================================================================================
+7. GIT (Control de Versiones)
+================================================================================
+
+📌 ¿QUÉ ES?
+Sistema que guarda el HISTORIAL COMPLETO de cambios de tu código.
+Como "guardar partida" pero para programación.
+
+📌 ¿PARA QUÉ SIRVE?
+
+Volver a versiones anteriores si algo se rompe
+
+Trabajar en equipo sin pisar el código de otros
+
+Tener ramas (main, dev, features) para desarrollo organizado
+
+📌 ¿POR QUÉ SE USA?
+Es el estándar INDUSTRIAL. El 99% de las empresas usan Git. No saber Git
+es como ser chofer y no saber manejar.
+
+📌 COMANDOS PRINCIPALES:
+
+| Comando	                  | Qué hace                                        |
+|---------------------------|-------------------------------------------------|
+| git init	                | Crea un repositorio nuevo                       |
+| git clone URL	            | Copia un repositorio remoto a tu máquina        |
+| git status	              | Muestra archivos modificados                    |
+| git add archivo	          | Agrega archivo al área de preparación (staging) |
+| git add .	                | Agrega TODOS los archivos modificados           |
+| git commit -m "mensaje" 	| Guarda los cambios (crea un checkpoint)         |
+| git log	                  | Muestra historial de commits                    |
+| git branch nombre	        | Crea una rama nueva                             |
+| git checkout nombre	      | Cambia a otra rama                              |
+| git merge rama	          | Trae cambios de otra rama a la actual           |
+| git push	                | Sube commits al repositorio remoto              |
+| git pull	                | Baja cambios del repositorio remoto             |
+
+📌 FLUJO TÍPICO DE TRABAJO:
+
+1. git checkout -b mi-rama (creas rama desde dev)
+
+2. Haces cambios en código
+
+3. git add .
+
+4. git commit -m "descripción"
+
+5. git push origin mi-rama
+
+6. Creas Pull Request (en GitHub) para mezclar a dev
+
+================================================================================
+8. PYTEST (Pruebas Unitarias - BONO)
+================================================================================
+
+📌 ¿QUÉ ES?
+Framework para escribir y ejecutar pruebas automáticas de tu código.
+
+📌 ¿PARA QUÉ SIRVE?
+Verificar que tu código hace lo que debe hacer. Si cambias algo, las pruebas
+te avisan si rompiste algo.
+
+📌 ¿POR QUÉ SE USA?
+Confianza: puedes modificar código sabiendo que las pruebas detectarán errores.
+Ahorro: evita que bugs lleguen a producción.
+
+📌 COMANDOS PRINCIPALES:
+
+| Comando	                              | Qué hace                                    |
+|---------------------------------------|---------------------------------------------|
+| pytest	                              | Ejecuta todas las pruebas                   |
+| pytest tests/ -v	                    | Ejecuta con salida detallada (-v = verbose) |
+| pytest test_api.py::test_crear_tarea	| Ejecuta UNA prueba específica               |
+| pytest --cov=app	                    | Muestra cobertura de código                 |
+
+📌 FUNCIONES PRINCIPALES DE PYTEST:
+
+| Función	                   | Qué hace	                             | Ejemplo                                       |
+|----------------------------|---------------------------------------|-----------------------------------------------|
+| assert condicion	         | Verifica que condición sea verdadera	 | assert 5 == 5                                 |
+| @pytest.fixture	           | Prepara datos/estado antes de pruebas | @pytest.fixture para tener "cliente"          |
+| client.get(url)	           | Simula petición GET	                 | client.get('/tareas/')                        |
+| client.post(url, json=...) | Simula petición POST	                 | client.post('/tareas/', json={'titulo': 'x'}) |
+
+
+

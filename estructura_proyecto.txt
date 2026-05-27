@@ -1,0 +1,30 @@
+PATRON DE FABRICA DE APLICACIONES
+
+proyecto_api/
+│
+├── app/
+│   ├── __init__.py            # Fábrica de la aplicación (create_app)
+│   ├── models/
+│   │   ├── __init__.py
+│   │   └── tarea.py           # Lógica de datos (db en memoria)
+│   ├── services/
+│   │   ├── __init__.py
+│   │   └── tarea_service.py   # Lógica de negocio
+│   ├── controllers/
+│   │   ├── __init__.py
+│   │   └── tareas.py          # Manejo de peticiones HTTP (endpoints)
+│   └── utils/
+│       ├── __init__.py
+│       └── validators.py      # Validaciones reutilizables
+│
+├── tests/
+│   ├── __init__.py
+│   ├── test_api.py           # Pruebas de endpoints (bono opcional)
+│   └── test_service.py       # Pruebas unitarias del servicio
+│
+├── venv/                     # Entorno virtual (ignorado por Git)
+├── .gitignore                # Todo lo que ignora Git
+├── .pylintrc                 # Configuración personalizada de Pylint
+├── requirements.txt          # Dependencias (versiones compatibles)
+├── README.md                 # Documentación completa
+└── main.py                   # Punto de entrada para ejecutar la app

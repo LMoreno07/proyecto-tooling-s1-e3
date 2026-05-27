@@ -1,0 +1,22 @@
+[MASTER]
+# Archivos a ignorar
+ignore=tests
+
+[MESSAGES CONTROL]
+# Desactivar warnings que no necesitamos para este proyecto
+disable=
+    missing-docstring,    # No obligamos docstrings en cada función
+    too-few-public-methods,
+    too-many-arguments
+
+[DESIGN]
+# Aumentar límite de variables locales (por defecto 15)
+max-locals=20
+
+[FORMAT]
+# Máxima longitud de línea (PEP8 es 79, pero lo ajustamos a 100)
+max-line-length=100
+
+[BASIC]
+# Buena práctica: exigir nombres de funciones y variables en snake_case
+# (por defecto ya lo hace Pylint)
