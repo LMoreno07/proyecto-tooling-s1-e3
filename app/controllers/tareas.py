@@ -20,15 +20,15 @@ def crear_tarea():
         return jsonify({"error": "El campo 'titulo' es requerido"}), 400
 
     if not isinstance(data["titulo"], str) or len(data["titulo"].strip()) == 0:
-        return jsonify({"error": "El 'titulo' debe ser un texto no vacío"}), 400
+        return jsonify({"error": "El 'titulo' debe ser un texto no vacío"
+                        }), 400
 
     nueva_tarea = TareaService.crear_tarea(data["titulo"].strip())
     return jsonify(nueva_tarea), 201
 
 
-@tarea_bp.route("/<int:id>", methods=["DELETE"])  # DELETE /tareas/1
-def eliminar_tarea(id):
-    if TareaService.eliminar_tarea(id):
-        return jsonify({"mensaje": f"Tarea {id} eliminada"}), 200
-    else:
-        return jsonify({"error": f"Tarea {id} no encontrada"}), 404
+@tarea_bp.route("/<int:tarea_id>", methods=["DELETE"])  # DELETE /tareas/1
+def eliminar_tarea(tarea_id):
+    if TareaService.eliminar_tarea(tarea_id):
+        return jsonify({"mensaje": f"Tarea {tarea_id} eliminada"}), 200
+    return jsonify({"error": f"Tarea {tarea_id} no encontrada"}), 404
