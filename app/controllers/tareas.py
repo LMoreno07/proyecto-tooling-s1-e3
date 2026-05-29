@@ -3,11 +3,8 @@ from app.services.tarea_service import TareaService
 
 tarea_bp = Blueprint("tareas", __name__, url_prefix="/tareas")
 
-# Ruta raíz temporal para que no dé 404 http://127.0.0.1:5000/tareas
-#@tarea_bp.route('/')
-#def index():
-#    return {"mensaje": "Bienvenido a mi API. Ve a /tareas/ para ver los endpoints."}, 200
 
+# Ruta http://127.0.0.1:5000/tareas
 @tarea_bp.route("/", methods=["GET"])  # GET /tareas/
 def listar_tareas():
     tareas = TareaService.listar_todas()
