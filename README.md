@@ -34,11 +34,7 @@ Al iniciar la aplicación, ya hay una tarea en memoria:
 
 ```json
 {
-  "id": 1,
   "titulo": "Tarea de ejemplo",
-  "completada": false,
-  "descripcion": "Esta tarea está precargada al iniciar la app.",
-  "prioridad": "media"
 }
 ```
 
@@ -54,27 +50,17 @@ Body:
 ```json
 {
   "titulo": "Mi tarea nueva",
-  "descripcion": "Una descripción opcional",
-  "prioridad": "alta",
-  "completada": false
 }
 ```
 
 Campos admitidos:
 - `titulo` (obligatorio)
-- `descripcion` (opcional)
-- `prioridad` (opcional, por defecto `media`)
-- `completada` (opcional, por defecto `false`)
 
 Respuesta exitosa:
 
 ```json
 {
-  "id": 2,
   "titulo": "Mi tarea nueva",
-  "completada": false,
-  "descripcion": "Una descripción opcional",
-  "prioridad": "alta"
 }
 ```
 
@@ -90,8 +76,5 @@ Devuelve un ejemplo del cuerpo JSON que debes enviar en el POST:
 ```json
 {
   "titulo": "Mi tarea nueva",
-  "descripcion": "Una descripción opcional",
-  "prioridad": "alta",
-  "completada": false
 }
 ```

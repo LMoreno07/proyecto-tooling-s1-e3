@@ -15,9 +15,6 @@ def listar_tareas():
 def ejemplo_tarea():
     ejemplo = {
         "titulo": "Mi tarea nueva",
-        "descripcion": "Una descripción opcional",
-        "prioridad": "alta",
-        "completada": False
     }
     return jsonify(ejemplo), 200
 
@@ -26,9 +23,6 @@ def ejemplo_tarea():
 def crear_tarea():
     ejemplo_json = {
         "titulo": "Mi tarea nueva",
-        "descripcion": "Una descripción opcional",
-        "prioridad": "alta",
-        "completada": False
     }
 
     if not request.is_json:
