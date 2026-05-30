@@ -7,12 +7,14 @@ class TareaService:
         return tareas
    
     @staticmethod
-    def crear_tarea(titulo):
+    def crear_tarea(data):
         global CONTADOR_ID
         nueva_tarea = {
             "id": CONTADOR_ID,
-            "titulo": titulo,
-            "completada": False
+            "titulo": data["titulo"].strip(),
+            "completada": bool(data.get("completada", False)),
+            "descripcion": data.get("descripcion", "").strip() if isinstance(data.get("descripcion", ""), str) else "",
+            "prioridad": data.get("prioridad", "media").strip() if isinstance(data.get("prioridad", "media"), str) else "media"
         }
         tareas.append(nueva_tarea)
         CONTADOR_ID += 1

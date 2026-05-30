@@ -11,19 +11,47 @@ def listar_tareas():
     return jsonify(tareas), 200
 
 
+@tarea_bp.route("/ejemplo", methods=["GET"])  # GET /tareas/ejemplo
+def ejemplo_tarea():
+    ejemplo = {
+        "titulo": "Mi tarea nueva",
+        "descripcion": "Una descripción opcional",
+        "prioridad": "alta",
+        "completada": False
+    }
+    return jsonify(ejemplo), 200
+
+
 @tarea_bp.route("/", methods=["POST"])  # POST /tareas/
 def crear_tarea():
-    data = request.get_json()
+    ejemplo_json = {
+        "titulo": "Mi tarea nueva",
+        "descripcion": "Una descripción opcional",
+        "prioridad": "alta",
+        "completada": False
+    }
+
+    if not request.is_json:
+        return jsonify({
+            "error": "El body debe ser JSON.",
+            "ejemplo": ejemplo_json
+        }), 400
+
+    data = request.get_json(silent=True)
+    if not data:
+        return jsonify({
+            "error": "No se recibió JSON válido.",
+            "ejemplo": ejemplo_json
+        }), 400
 
     # Validación simple
-    if not data or "titulo" not in data:
-        return jsonify({"error": "El campo 'titulo' es requerido"}), 400
+    if "titulo" not in data:
+        return jsonify({"error": "El campo 'titulo' es requerido", "ejemplo": ejemplo_json}), 400
 
     if not isinstance(data["titulo"], str) or len(data["titulo"].strip()) == 0:
-        return jsonify({"error": "El 'titulo' debe ser un texto no vacío"
-                        }), 400
+        return jsonify({"error": "El 'titulo' debe ser un texto no vacío", "ejemplo": ejemplo_json}), 400
 
-    nueva_tarea = TareaService.crear_tarea(data["titulo"].strip())
+    nueva_tarea = TareaService.crear_tarea(data)
     return jsonify(nueva_tarea), 201
 
 
