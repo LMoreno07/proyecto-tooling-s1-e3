@@ -13,8 +13,6 @@ class TareaService:
             "id": CONTADOR_ID,
             "titulo": data["titulo"].strip(),
             "completada": bool(data.get("completada", False)),
-            "descripcion": data.get("descripcion", "").strip() if isinstance(data.get("descripcion", ""), str) else "",
-            "prioridad": data.get("prioridad", "media").strip() if isinstance(data.get("prioridad", "media"), str) else "media"
         }
         tareas.append(nueva_tarea)
         CONTADOR_ID += 1

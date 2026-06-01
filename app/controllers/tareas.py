@@ -11,14 +11,6 @@ def listar_tareas():
     return jsonify(tareas), 200
 
 
-@tarea_bp.route("/ejemplo", methods=["GET"])  # GET /tareas/ejemplo
-def ejemplo_tarea():
-    ejemplo = {
-        "titulo": "Mi tarea nueva",
-    }
-    return jsonify(ejemplo), 200
-
-
 @tarea_bp.route("/", methods=["POST"])  # POST /tareas/
 def crear_tarea():
     ejemplo_json = {
