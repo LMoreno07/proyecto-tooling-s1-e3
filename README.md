@@ -26,3 +26,7 @@ pip install -r requirements.txt
 
 # Ejecutar servidor
 python main.py
+
+# Ejecutar pruebas unitarias
+pytest
+

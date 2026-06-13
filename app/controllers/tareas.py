@@ -5,13 +5,13 @@ tarea_bp = Blueprint("tareas", __name__, url_prefix="/tareas")
 
 
 # Ruta http://127.0.0.1:5000/tareas
-@tarea_bp.route("/", methods=["GET"])  # GET /tareas/
+@tarea_bp.route("", methods=["GET"])  # GET /tareas
 def listar_tareas():
     tareas = TareaService.listar_todas()
     return jsonify(tareas), 200
 
 
-@tarea_bp.route("/", methods=["POST"])  # POST /tareas/
+@tarea_bp.route("", methods=["POST"])  # POST /tareas
 def crear_tarea():
     data = request.get_json()
 
