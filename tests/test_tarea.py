@@ -4,7 +4,7 @@ def test_listar_tareas(client):
     
     assert response.status_code == 200
 
-def test_crear_trea_exitosa(client):
+def test_crear_tarea_exitosa(client):
     response = client.post("/tareas", json={ "titulo": "Tarea de prueba" })
 
     assert response.status_code == 201
