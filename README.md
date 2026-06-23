@@ -48,6 +48,18 @@ black .
 flake8 --max-line-length=100 .
 
 # Ejecutar Pylint sobre el módulo principal y la aplicación
+```
+
+## Uso de la API
+
+### Tareas precargadas
+Al iniciar la aplicación, ya hay una tarea en memoria:
+
+```json
+{
+  "titulo": "Tarea de ejemplo",
+}
+```
 
 ### Crear tarea (POST)
 
