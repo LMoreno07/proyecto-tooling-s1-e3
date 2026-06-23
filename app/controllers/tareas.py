@@ -20,8 +20,7 @@ def crear_tarea():
         return jsonify({"error": "El campo 'titulo' es requerido"}), 400
 
     if not isinstance(data["titulo"], str) or len(data["titulo"].strip()) == 0:
-        return jsonify({"error": "El 'titulo' debe ser un texto no vacío"
-                        }), 400
+        return jsonify({"error": "El 'titulo' debe ser un texto no vacío"}), 400
 
     nueva_tarea = TareaService.crear_tarea(data["titulo"].strip())
     return jsonify(nueva_tarea), 201

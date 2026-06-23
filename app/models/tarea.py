@@ -1,3 +1,2 @@
-# Esta es nuesta base de datos :D Jajjajaja
-tareas = []  # Lista
+tareas = []
 CONTADOR_ID = 1
